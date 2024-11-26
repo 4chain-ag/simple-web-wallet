@@ -23,6 +23,7 @@ body {
   background-image: url("public/bg.png");
   background-size: cover;
   background-position-x: right;
+  background-attachment: fixed;
 
   min-width: 320px;
   min-height: 100vh;
@@ -40,6 +41,10 @@ nav {
   background-color: rgb(0 17 65);
   color: white;
   padding: 10px 20px;
+}
+
+#container {
+  padding-bottom: 50px;
 }
 
 .logo {
@@ -88,6 +93,10 @@ ul ul {
   margin-left: 20px;
 }
 
+p {
+    margin: 10px 0;
+}
+
 .note {
   background: #eef6ff;
   color: #0056b3;
@@ -100,13 +109,6 @@ ul ul {
 label {
   display: block;
   margin-bottom: 5px;
-}
-input {
-  width: calc(100% - 20px);
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1em;
 }
 button {
   padding: 10px 15px;
@@ -130,4 +132,35 @@ button:hover {
   margin-top: 10px;
   font-family: monospace;
   word-wrap: break-word;
+}
+
+input {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 0;
+  font-size: 0.8em;
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+  outline: none;
+}
+
+input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+input:disabled {
+  background-color: #f0f0f0;
+  color: #666;
+  border-color: #ccc;
+  cursor: not-allowed;
 }

@@ -10,7 +10,7 @@ export default function App() {
 
     return (
         <BrowserRouter>
-            <div id="main">
+            <div id="container">
                 <nav>
                     <div className="logo">
                         <NavLink to="/">
