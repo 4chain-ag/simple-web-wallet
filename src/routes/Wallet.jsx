@@ -82,7 +82,13 @@ function WalletPage({xPriv, reset}) {
 
             <h3>📜 Transaction History</h3>
             {transactions.map((tx) => (
-                <JsonResponseDisplay data={tx} title={"Transaction"}/>
+                <div className="transaction-item">
+                    <a href={"https://whatsonchain.com/tx/" + tx.id} target="_blank" rel="noreferrer">
+                        Transaction 🔗 {tx.id}
+                    </a>
+                    <JsonResponseDisplay data={tx} title={"Transaction"}/>
+                </div>
+
             ))}
         </>
     )

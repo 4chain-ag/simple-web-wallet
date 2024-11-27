@@ -72,6 +72,15 @@ nav {
   text-decoration: underline;
 }
 
+a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 main {
   max-width: 1000px;
   margin: 20px auto;
@@ -174,4 +183,13 @@ input:disabled {
   color: #666;
   border-color: #ccc;
   cursor: not-allowed;
+}
+
+.transaction-item {
+    align-items: center;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
