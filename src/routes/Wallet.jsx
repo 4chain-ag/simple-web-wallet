@@ -1,8 +1,8 @@
 import {useCallback, useEffect, useState} from "react";
-import JsonResponseDisplay from "../components/JsonResponseDisplay.jsx";
-import getUserInfo from "../client/getUserInfo.jsx";
-import getTransactions from "../client/getTransactions.jsx";
-import sendTransaction from "../client/sendTransaction.jsx";
+import JsonResponseDisplay from "../components/JsonResponseDisplay";
+import getUserInfo from "../client/getUserInfo";
+import getTransactions from "../client/getTransactions";
+import sendTransaction from "../client/sendTransaction";
 
 export default function Wallet() {
     const [xPrivInput, setXPrivInput] = useState("")
