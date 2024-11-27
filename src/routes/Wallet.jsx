@@ -16,14 +16,14 @@ export default function Wallet() {
     return <>
         {!xPriv ? (
             <>
-                <h4>To login as a user, provide your xPriv</h4>
+                <h4>🔐 Access your wallet by entering your private key (xPriv) below.</h4>
                 <input
                     type="text"
                     value={xPrivInput}
                     onChange={(e) => setXPrivInput(e.target.value)}
                     placeholder={"Enter your xPriv here"}
                 />
-                <button onClick={() => setXPriv(xPrivInput)}>Go to your wallet</button>
+                <button onClick={() => setXPriv(xPrivInput)}>🚪Access My Wallet</button>
             </>
         ) : <WalletPage xPriv={xPriv} reset={reset}/>}
     </>
@@ -52,7 +52,7 @@ function WalletPage({xPriv, reset}) {
 
     if (!userInfo && !loading) {
         return <>
-            <p>Cannot fetch user info - post probably wrong xPriv has been provided.</p>
+            <p>❌ Unable to fetch user details. Please check your xPriv and try again.</p>
             <button onClick={reset}>Go back</button>
         </>
     }
@@ -63,15 +63,15 @@ function WalletPage({xPriv, reset}) {
                 onClick={refresh}
                 disabled={loading}
             >
-                {loading ? "Refreshing..." : "Refresh"}
+                {loading ? "Refreshing..." : "🔄 Refresh"}
             </button>
-            <h1>Hello</h1>
+            <h1>👋 Welcome to Your Wallet</h1>
             <h3>User info</h3>
             <JsonResponseDisplay data={userInfo} title={"User info"}/>
 
             <SendTransaction xPriv={xPriv} refresh={refresh}/>
 
-            <h3>Transactions</h3>
+            <h3>📜 Transaction History</h3>
             {transactions.map((tx) => (
                 <JsonResponseDisplay data={tx} title={"Transaction"}/>
             ))}
@@ -102,7 +102,7 @@ function SendTransaction({xPriv, refresh}) {
     }
 
     return <>
-        <h3>Send transaction</h3>
+        <h3>💸 Send transaction</h3>
         <input
             type="text"
             placeholder="Recipient paymail"
@@ -119,15 +119,15 @@ function SendTransaction({xPriv, refresh}) {
             onClick={onClick}
             disabled={sending || !recipient || !amount}
         >
-            {sending ? "Sending..." : "Send"}
+            {sending ? "Sending..." : "📤 Send"}
         </button>
 
         {newTxObject && <>
-            <h4>Transaction has been sent</h4>
+            <h4>✅ Transaction has been sent</h4>
             <JsonResponseDisplay data={newTxObject} title={"New transaction"}/>
 
             <a href={"https://whatsonchain.com/tx/" + newTxObject.id} target="_blank" rel="noreferrer">
-                View transaction on whatsonchain
+                🔗 View transaction on whatsonchain
             </a>
         </>}
     </>
