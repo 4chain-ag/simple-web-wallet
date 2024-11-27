@@ -97,6 +97,12 @@ p {
     margin: 10px 0;
 }
 
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
 .note {
   background: #eef6ff;
   color: #0056b3;

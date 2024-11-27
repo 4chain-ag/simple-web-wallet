@@ -69,7 +69,11 @@ function WalletPage({xPriv, reset}) {
             <h3>User info</h3>
             <JsonResponseDisplay data={userInfo} title={"User info"}/>
 
+            <hr/>
+
             <SendTransaction xPriv={xPriv} refresh={refresh}/>
+
+            <hr/>
 
             <h3>📜 Transaction History</h3>
             {transactions.map((tx) => (
