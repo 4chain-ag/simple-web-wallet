@@ -1,9 +1,11 @@
 import {NavLink} from "react-router";
+import ConnectionChecker from "../components/ConnectionChecker.jsx";
+
 
 export default function Home() {
     return (
         <div>
-            <h1>Welcome to the Bitcoin SV Workshop 🚀</h1>
+            <h1><ConnectionChecker/> Welcome to the Bitcoin SV Workshop 🚀</h1>
 
             <p>This React app is your starting point for hands-on exercises during the Bitcoin Satoshi Vision (BSV)
                 workshops. Explore the power of Bitcoin SV as you work through the provided tools and features.</p>

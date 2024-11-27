@@ -36,8 +36,6 @@ export default function CreateUser() {
                     <DisplayKeys keys={keys} title={"Generated keys"}/>
 
                     <MnemonicExample/>
-
-                    <GetSharedConfig/>
                 </div>
             )}
 
