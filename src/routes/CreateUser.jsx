@@ -1,7 +1,10 @@
 import {useState} from "react";
-import {generateKeys, getKeysFromMnemonic, SpvWalletClient} from '@bsv/spv-wallet-js-client'
-import {defaultAdminKey, spvWalletURL, spvWalletURLAPI} from "../constants.js";
+import {generateKeys, getKeysFromMnemonic} from '@bsv/spv-wallet-js-client'
 import JsonResponseDisplay from "../components/JsonResponseDisplay.jsx";
+import getSharedConfig from "../client/getSharedConfig.js";
+import addXPub from "../client/addXPub.js";
+import addPaymail from "../client/addPaymail.js";
+import DisplayKeys from "../components/DisplayKeys.jsx";
 
 export default function CreateUser() {
     const [keys, setKeys] = useState(null)
@@ -39,8 +42,6 @@ export default function CreateUser() {
             )}
 
             <AddXPub/>
-
-
         </div>
     )
 }
@@ -90,13 +91,11 @@ function AddXPub() {
     const [xPub, setXPub] = useState("")
     const [xPubObj, setXPubObj] = useState(null)
 
-    const addXPub = async () => {
+    const onClick = async () => {
         try {
-            const client = new SpvWalletClient(spvWalletURL, {adminKey: defaultAdminKey})
-
-            const xPubObj = await client.AdminNewXpub(xPub, {})
-            setXPubObj(xPubObj)
-        }catch(e) {
+            const response = await addXPub(xPub)
+            setXPubObj(response)
+        } catch (e) {
             console.error(e)
             alert("Cannot add xPub")
         }
@@ -111,7 +110,8 @@ function AddXPub() {
 
             <div className="note">
                 <p>
-                    💡 Note: To add an xPub to the `spv-wallet` you need to have an <strong>admin key</strong> which is used to manage the wallet.
+                    💡 Note: To add an xPub to the `spv-wallet` you need to have an <strong>admin key</strong> which is
+                    used to manage the wallet.
                 </p>
             </div>
 
@@ -122,7 +122,7 @@ function AddXPub() {
                 onChange={(e) => setXPub(e.target.value)}
                 placeholder={"Enter your xPub here"}
             />
-            <button onClick={addXPub}>Add xPub</button>
+            <button onClick={onClick}>Add xPub</button>
 
             {xPubObj && (
                 <>
@@ -141,13 +141,11 @@ function AddPaymail({xpub}) {
     const [publicName, setPublicName] = useState("")
     const [paymailObject, setPaymailObject] = useState(null)
 
-    const addPaymail = async () => {
+    const onClick = async () => {
         try {
-            const client = new SpvWalletClient(spvWalletURL, {adminKey: defaultAdminKey})
-
-            const paymailObj = await client.AdminCreatePaymail(xpub, paymail, publicName, "")
-            setPaymailObject(paymailObj)
-        }catch(e) {
+            const response = await addPaymail(xpub, paymail, publicName)
+            setPaymailObject(response)
+        } catch (e) {
             console.error(e)
             alert("Cannot add xPub")
         }
@@ -157,13 +155,15 @@ function AddPaymail({xpub}) {
         <div>
             <h2>Add a paymail to `spv-wallet`</h2>
 
-            <p>The main transaction flow in spv-wallet is based on `paymail` that simplifies sending funds between parties.</p>
+            <p>The main transaction flow in spv-wallet is based on `paymail` that simplifies sending funds between
+                parties.</p>
 
             <p>After adding the xPub, the next step is to add your paymail</p>
 
-            <p>You can provide whatever you want alias but the domain should be one of the supported by current installation of spv-wallet</p>
+            <p>You can provide whatever you want alias but the domain should be one of the supported by current
+                installation of spv-wallet</p>
 
-            <GetSharedConfig />
+            <GetSharedConfig/>
 
             <p>Enter your paymail below:</p>
             <input
@@ -179,7 +179,7 @@ function AddPaymail({xpub}) {
                 onChange={(e) => setPublicName(e.target.value)}
                 placeholder={"Enter your public name here"}
             />
-            <button onClick={addPaymail}>Add paymail</button>
+            <button onClick={onClick}>Add paymail</button>
 
             {paymailObject && (
                 <>
@@ -192,15 +192,12 @@ function AddPaymail({xpub}) {
 }
 
 function GetSharedConfig() {
-    const [data, setData] = useState(null)
+    const [config, setConfig] = useState(null)
 
-    const getSharedConfig = async () => {
+    const onClick = async () => {
         try {
-            const client = new SpvWalletClient(spvWalletURLAPI, {adminKey: defaultAdminKey})
-            const sharedConfig = await client.GetSharedConfig()
-
-            setData(sharedConfig)
-        }catch (e) {
+            setConfig(await getSharedConfig())
+        } catch (e) {
             console.error(e)
             alert("Cannot get shared config")
         }
@@ -212,21 +209,9 @@ function GetSharedConfig() {
         <p>Get shared config is a method that allows you to get the shared configuration of the wallet</p>
         <p>For this part, you should check the supported domains</p>
 
-        <button onClick={getSharedConfig}>Get shared config</button>
+        <button onClick={onClick}>Get shared config</button>
 
-        {data != null && <JsonResponseDisplay data={data}/>}
+        {config != null && <JsonResponseDisplay data={config}/>}
     </>
 }
 
-function DisplayKeys({keys, title}) {
-    return (
-        <div>
-            <div className="key-display">
-                <strong>{title}:</strong>
-                <p><strong>xpriv:</strong> {keys.xPriv}</p>
-                <p><strong>xpub:</strong> {keys.xPub}</p>
-                <p><strong>mnemonic:</strong> {keys.mnemonic}</p>
-            </div>
-        </div>
-    )
-}

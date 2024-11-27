@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route, Navigate, NavLink} from "react-router";
+import {BrowserRouter, Navigate, NavLink, Route, Routes} from "react-router";
 import Home from "./routes/Home";
 import CreateUser from "./routes/CreateUser.jsx";
 import Wallet from "./routes/Wallet.jsx";
@@ -40,7 +40,6 @@ export default function App() {
                 </main>
             </div>
         </BrowserRouter>
-
     )
 }
 

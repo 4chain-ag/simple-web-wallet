@@ -122,6 +122,11 @@ button {
 button:hover {
   background: #004494;
 }
+button:disabled {
+    background: #ccc;
+    color: #666;
+    cursor: auto;
+}
 
 .key-display {
   background: #eef6ff;
