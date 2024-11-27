@@ -23,7 +23,7 @@ export default function Wallet() {
                     onChange={(e) => setXPrivInput(e.target.value)}
                     placeholder={"Enter your xPriv here"}
                 />
-                <button onClick={() => setXPriv(xPrivInput)}>🚪Access My Wallet</button>
+                <button onClick={() => setXPriv(xPrivInput)}>Access My Wallet</button>
             </>
         ) : <WalletPage xPriv={xPriv} reset={reset}/>}
     </>
