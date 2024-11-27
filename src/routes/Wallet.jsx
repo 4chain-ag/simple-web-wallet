@@ -3,6 +3,7 @@ import JsonResponseDisplay from "../components/JsonResponseDisplay";
 import getUserInfo from "../client/getUserInfo";
 import getTransactions from "../client/getTransactions";
 import sendTransaction from "../client/sendTransaction";
+import sendOpReturnTx from "../client/sendOpReturnTx.js";
 
 export default function Wallet() {
     const [xPrivInput, setXPrivInput] = useState("")
@@ -75,6 +76,10 @@ function WalletPage({xPriv, reset}) {
 
             <hr/>
 
+            <SendOpReturnTransaction xPriv={xPriv} refresh={refresh}/>
+
+            <hr/>
+
             <h3>📜 Transaction History</h3>
             {transactions.map((tx) => (
                 <JsonResponseDisplay data={tx} title={"Transaction"}/>
@@ -84,7 +89,7 @@ function WalletPage({xPriv, reset}) {
 }
 
 function SendTransaction({xPriv, refresh}) {
-    const [recipient, setRecipient] = useState("")
+        const [recipient, setRecipient] = useState("")
     const [amount, setAmount] = useState(0)
     const [newTxObject, setNewTxObject] = useState(null)
     const [sending, setSending] = useState(false)
@@ -129,6 +134,53 @@ function SendTransaction({xPriv, refresh}) {
         {newTxObject && <>
             <h4>✅ Transaction has been sent</h4>
             <JsonResponseDisplay data={newTxObject} title={"New transaction"}/>
+
+            <a href={"https://whatsonchain.com/tx/" + newTxObject.id} target="_blank" rel="noreferrer">
+                🔗 View transaction on whatsonchain
+            </a>
+        </>}
+    </>
+}
+
+function SendOpReturnTransaction({xPriv, refresh}) {
+    const [data, setData] = useState("")
+    const [newTxObject, setNewTxObject] = useState(null)
+    const [sending, setSending] = useState(false)
+
+    const onClick = async () => {
+        try {
+            setSending(true)
+            setNewTxObject(null)
+            const response = await sendOpReturnTx(xPriv, data)
+
+            setNewTxObject(response)
+            refresh()
+        } catch (e) {
+            console.error(e)
+            alert("Cannot send OpReturn transaction")
+        } finally {
+            setSending(false)
+        }
+    }
+
+    return <>
+        <h3>💾 Send OpReturn transaction</h3>
+        <input
+            type="text"
+            placeholder="Data"
+            value={data}
+            onChange={(e) => setData(e.target.value)}
+        />
+        <button
+            onClick={onClick}
+            disabled={sending || !data}
+        >
+            {sending ? "Sending..." : "📤 Send"}
+        </button>
+
+        {newTxObject && <>
+            <h4>✅ Transaction has been sent</h4>
+            <JsonResponseDisplay data={newTxObject} title={"New OpReturn transaction"}/>
 
             <a href={"https://whatsonchain.com/tx/" + newTxObject.id} target="_blank" rel="noreferrer">
                 🔗 View transaction on whatsonchain
