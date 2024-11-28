@@ -1,8 +1,13 @@
-# React + Vite
+# Simple WEB Wallet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This React app is your starting point for hands-on exercises during the Bitcoin Satoshi Vision (BSV)
+workshops. Explore the power of Bitcoin SV as you work through the provided tools and features.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The app will allow you: 
+- generate your key pair
+- register your public key on spv-wallet
+- attach paymail address to your public key
+- send and receive BSV
+- send OP_RETURN transactions
+- browse your transaction history
+- check your balance
