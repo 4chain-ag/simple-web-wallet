@@ -161,7 +161,7 @@ function AddPaymail({xpub}) {
             <p>You can provide whatever you want alias but the domain should be one of the supported by current
                 installation of spv-wallet</p>
 
-            <GetSharedConfig/>
+            <GetSharedConfig xPub={xpub}/>
 
             <p>Enter your paymail below:</p>
             <input
@@ -189,12 +189,12 @@ function AddPaymail({xpub}) {
     )
 }
 
-function GetSharedConfig() {
+function GetSharedConfig({xPub}) {
     const [config, setConfig] = useState(null)
 
     const onClick = async () => {
         try {
-            setConfig(await getSharedConfig())
+            setConfig(await getSharedConfig(xPub))
         } catch (e) {
             console.error(e)
             alert("Cannot get shared config")

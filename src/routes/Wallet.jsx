@@ -50,8 +50,11 @@ function WalletPage({xPriv, reset}) {
     useEffect(() => {
         refresh().then(() => console.log("Refreshed"))
     }, [refresh]);
-
-    if (!userInfo && !loading) {
+    
+    if (!userInfo) {
+        if (loading) {
+            return <p>🔄 Loading...</p>
+        }
         return <>
             <p>❌ Unable to fetch user details. Please check your xPriv and try again.</p>
             <button onClick={reset}>Go back</button>
