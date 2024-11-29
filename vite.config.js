@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/spv-wallet': {
+      '/api': {
         target: 'https://bsvworkshops.pl',
         // target: 'http://localhost:3003',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/spv-wallet/, ''),
+        rewrite: (path) => path.replace(/^\/api/, ''),
 
         configure: (proxy, _options) => {
           proxy.on("error", (err, _req, _res) => {

@@ -1,8 +1,8 @@
 import {SpvWalletClient} from "@bsv/spv-wallet-js-client";
-import {defaultAdminKey, spvWalletURLAPI} from "../constants.js";
+import {spvWalletURL} from "../constants.js";
 
-const getSharedConfig = async () => {
-    const client = new SpvWalletClient(spvWalletURLAPI, {adminKey: defaultAdminKey})
+const getSharedConfig = async (xPub) => {
+    const client = new SpvWalletClient(spvWalletURL, {xPub})
     return await client.GetSharedConfig()
 }
 
