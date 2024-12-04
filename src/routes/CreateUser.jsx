@@ -145,7 +145,7 @@ function AddPaymail({xpub}) {
             setPaymailObject(response)
         } catch (e) {
             console.error(e)
-            alert("Cannot add xPub")
+            alert("Cannot add paymail")
         }
     }
 
