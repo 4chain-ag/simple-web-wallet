@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bsv/spv-wallet-js-client": "^1.0.0-beta.25",
+    "@bsv/spv-wallet-js-client": "^1.0.0-beta.27",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.0.1"
@@ -25,7 +25,6 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "globals": "^15.11.0",
-    "tslib": "^2.8.1",
     "vite": "^5.4.10"
   }
 }
